@@ -1,0 +1,11 @@
+gravity: 9.81
+timestep: 0.004
+max_flight_time: 6.0
+sample_interval: 0.016
+air_density: 1.225
+wind_mode: gusts
+wind: [0.25, 0.0, 0.0]
+wind_variation: 0.35
+gust_amplitude: 0.8
+magnus_enabled: true
+actual_drag_bias: 0.035

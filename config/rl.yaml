@@ -1,0 +1,6 @@
+algorithm: sac
+seed: 42
+timesteps: 100000
+curriculum_level: 1
+success_threshold: 0.20
+parallel_envs: 1

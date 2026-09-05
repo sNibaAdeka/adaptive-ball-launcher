@@ -1,0 +1,12 @@
+{
+  "name": "adaptive-ball-launcher-ui",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Three.js interactive renderer for Adaptive Ball Launcher RL Lab",
+  "dependencies": {
+    "three": "^0.183.1"
+  },
+  "devDependencies": {
+    "agent-browser": "^0.27.0"
+  }
+}

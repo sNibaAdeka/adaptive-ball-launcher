@@ -1,0 +1,7 @@
+mass: 0.0027
+radius: 0.020
+diameter: 0.040
+drag_coefficient: 0.47
+restitution: 0.82
+surface_friction: 0.32
+magnus_coefficient: 0.000018

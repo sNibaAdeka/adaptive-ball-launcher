@@ -1,0 +1,9 @@
+algorithm: sac
+ppo:
+  learning_rate: 0.0003
+  n_steps: 1024
+  batch_size: 128
+sac:
+  learning_rate: 0.0003
+  buffer_size: 200000
+  batch_size: 256

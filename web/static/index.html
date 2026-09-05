@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07131d" />
+    <title>Adaptive Ball Launcher · RL Lab</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main id="app" aria-label="Adaptive Ball Launcher RL Lab">
+      <canvas id="scene" aria-label="Interactive 3D simulation arena"></canvas>
+      <header class="topbar">
+        <div class="brand"><span class="brand-dot"></span><div><strong>BALL LAUNCHER</strong><small>INTERACTIVE PHYSICS SIMULATOR</small></div></div>
+        <div class="status"><i></i><span id="machine-state">IDLE · SELECT A TARGET</span></div>
+        <div class="top-actions"><button id="debug-toggle" class="quiet" title="Toggle physics debug (P)">DEBUG</button><button id="focus-target" class="quiet" title="Focus target (F)">FOCUS</button></div>
+      </header>
+
+      <aside class="panel environment">
+        <div class="panel-label">ENVIRONMENT</div>
+        <div class="metric"><span>TARGET DISTANCE</span><strong id="target-distance">—</strong></div>
+        <div class="metric secondary"><span>TARGET HEIGHT</span><strong id="target-height">—</strong></div>
+        <div class="metric secondary"><span>LAUNCHER HEIGHT</span><strong id="launch-height-readout">0.62 m</strong></div>
+        <div class="rule"></div>
+        <div class="wind-row"><span class="wind-glyph">↗</span><div><span>WIND · <b id="wind-mode">GUSTS</b></span><strong id="wind-value">0.25 m/s</strong></div></div>
+        <div class="metric compact secondary"><span>AIR DENSITY</span><strong id="density">1.225 kg/m³</strong></div>
+        <div class="metric compact secondary"><span>MAGNUS</span><strong id="magnus">ON</strong></div>
+        <div class="hint"><kbd>CLICK</kbd> a floor or platform to select a target</div>
+      </aside>
+
+      <aside class="panel decision">
+        <div class="panel-label"><span>AI DECISION</span><em id="decision-mode">PHYSICS-AWARE</em></div>
+        <div class="metric"><span>YAW</span><strong id="decision-yaw">—</strong></div>
+        <div class="metric"><span>PITCH</span><strong id="decision-pitch">—</strong></div>
+        <div class="metric"><span>VELOCITY</span><strong id="decision-velocity">—</strong></div>
+        <div class="metric secondary"><span>SPIN</span><strong id="decision-spin">0 / 0 / 0</strong></div>
+        <div class="actuator-stack"><div><span>YAW SERVO</span><i><b id="yaw-bar"></b></i></div><div><span>PITCH SERVO</span><i><b id="pitch-bar"></b></i></div><div><span>HEIGHT SERVO</span><i><b id="height-bar"></b></i></div></div>
+      </aside>
+
+      <section class="results"><div class="result-head"><span>RESULT</span><em id="result-state">AWAITING TARGET</em></div><div class="result-grid"><div><span>LANDING ERROR</span><strong id="landing-error">—</strong></div><div><span>FLIGHT TIME</span><strong id="flight-time">—</strong></div><div class="secondary"><span>MAX HEIGHT</span><strong id="max-height">—</strong></div><div class="secondary"><span>REWARD</span><strong id="reward">—</strong></div></div><div class="prediction-strip"><span>PREDICTION ERROR</span><b id="prediction-error">—</b><span>·</span><span id="contact-surface">NO CONTACT YET</span></div></section>
+
+      <section id="solver" class="solver" aria-live="polite">
+        <div class="solver-head"><span>TRAJECTORY SOLVER</span><i id="solver-state">WAITING FOR TARGET</i></div>
+        <div id="solver-line-1">Click a target to calculate the shot.</div>
+        <div id="solver-line-2">MuJoCo uses gravity, drag, wind and spin.</div>
+      </section>
+
+      <section class="control-deck">
+        <div class="mode-switch"><button class="mode active" data-mode="ai">AI MODE</button><button class="mode" data-mode="manual">MANUAL</button></div>
+        <div class="slider-control" data-manual><label>YAW <output id="yaw-output">0°</output></label><input id="yaw" type="range" min="-75" max="75" value="0" /></div>
+        <div class="slider-control" data-manual><label>PITCH <output id="pitch-output">38°</output></label><input id="pitch" type="range" min="5" max="80" value="38" /></div>
+        <div class="slider-control" data-manual><label>VELOCITY <output id="velocity-output">10.0 m/s</output></label><input id="velocity" type="range" min="2" max="18" step=".1" value="10" /></div>
+        <div class="slider-control" data-manual><label>SPIN X <output id="spin-x-output">0 rad/s</output></label><input id="spin-x" type="range" min="-180" max="180" step="1" value="0" /></div>
+        <div class="slider-control" data-manual><label>SPIN Y <output id="spin-y-output">0 rad/s</output></label><input id="spin-y" type="range" min="-180" max="180" step="1" value="0" /></div>
+        <div class="slider-control" data-manual><label>SPIN Z <output id="spin-z-output">0 rad/s</output></label><input id="spin-z" type="range" min="-180" max="180" step="1" value="0" /></div>
+        <div class="slider-control"><label>HEIGHT <output id="height-output">0.62 m</output></label><input id="height" type="range" min=".2" max="2" step=".01" value=".62" /></div>
+        <button id="launch" class="launch" disabled><span>LAUNCH</span><small>SPACE</small></button>
+        <button id="random-target" class="icon-action" title="Random target (T)">✦</button><button id="clear" class="icon-action" title="Clear trajectory (C)">⌫</button><button id="replay-last" class="icon-action" title="Replay last shot (R)">↻</button><button id="replay-best" class="icon-action" title="Replay best shot">★</button><button id="replay-worst" class="icon-action" title="Replay worst shot">!</button>
+      </section>
+
+      <div id="toast" role="status"></div>
+      <footer><span><kbd>LEFT CLICK</kbd> TARGET</span><span><kbd>RIGHT DRAG</kbd> ORBIT</span><span><kbd>MIDDLE DRAG</kbd> PAN</span><span><kbd>SCROLL</kbd> ZOOM</span><span><kbd>W A S D</kbd> MOVE</span><span><kbd>R</kbd> REPEAT</span></footer>
+    </main>
+    <script type="module" src="/static/app.js"></script>
+  </body>
+</html>

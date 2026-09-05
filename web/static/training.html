@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ball Launcher · Training</title>
+    <link rel="stylesheet" href="/static/training.css" />
+  </head>
+  <body>
+    <main>
+      <header><a href="/">← Arena</a><div><span class="dot"></span><strong>LIVE RL TRAINING</strong></div><span id="status">WAITING</span></header>
+      <section class="hero"><div><p class="eyebrow">SAC · HEADLESS MUJOCO</p><h1>Learning to land the ball<br />on arbitrary targets.</h1><p class="sub">Each episode simulates gravity, aerodynamic drag, wind, actuator latency and randomized ball parameters.</p></div><div class="progress"><span>TRAINING STEP</span><strong id="step">0</strong><div class="bar"><i id="bar"></i></div><small id="total">Waiting for a training run</small></div></section>
+      <section class="stats"><article><span>EPISODES</span><strong id="episodes">0</strong></article><article><span>LATEST ERROR</span><strong id="error">—</strong></article><article><span>SUCCESS &lt; 20 CM</span><strong id="success">—</strong></article><article><span>MEAN REWARD</span><strong id="reward">—</strong></article></section>
+      <section class="chart-card"><div class="chart-head"><div><span>LIVE METRICS</span><strong>Landing error per episode</strong></div><p><i></i> lower is better</p></div><canvas id="chart" width="1000" height="360"></canvas><div class="chart-foot"><span>earlier episodes</span><span>latest episode</span></div></section>
+      <p class="note">The simulation renderer is disabled during learning for speed. Open <a href="/">Arena</a> to test the resulting policy interactively.</p>
+    </main>
+    <script type="module" src="/static/training.js"></script>
+  </body>
+</html>

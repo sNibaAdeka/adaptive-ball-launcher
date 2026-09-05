@@ -1,0 +1,22 @@
+position: [0.0, -4.7, 0.20]
+height_limits: [0.20, 2.00]
+yaw_limits: [-75.0, 75.0]
+pitch_limits: [5.0, 80.0]
+velocity_limits: [2.0, 18.0]
+default_height: 0.62
+default_pitch: 38.0
+default_yaw: 0.0
+max_yaw_velocity: 95.0
+max_pitch_velocity: 80.0
+max_height_velocity: 0.65
+max_yaw_acceleration: 320.0
+max_pitch_acceleration: 260.0
+max_height_acceleration: 2.0
+response_delay: 0.08
+servo_position_noise: 0.20
+gear_backlash: 0.12
+velocity_noise: 0.025
+angle_noise: 0.18
+ball_mass_variation: 0.02
+drag_variation: 0.04
+spin_variation: 4.0

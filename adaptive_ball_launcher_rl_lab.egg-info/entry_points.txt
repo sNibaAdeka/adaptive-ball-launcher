@@ -1,0 +1,2 @@
+[console_scripts]
+adaptive-ball-launcher = adaptive_ball_launcher.main:main

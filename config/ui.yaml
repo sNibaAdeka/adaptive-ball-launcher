@@ -1,0 +1,4 @@
+theme: night
+show_debug: false
+show_predicted_trajectory: true
+show_actual_trajectory: true

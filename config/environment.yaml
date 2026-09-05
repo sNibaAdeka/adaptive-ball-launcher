@@ -1,0 +1,8 @@
+arena_width: 12.0
+arena_length: 14.0
+arena_height_limit: 6.0
+target_radius: 0.12
+platforms:
+  - {name: low_platform, position: [-2.8, 1.5, 0.22], size: [1.25, 1.0, 0.22], surface: soft}
+  - {name: high_platform, position: [2.9, 2.4, 0.48], size: [1.1, 0.9, 0.48], surface: high_friction}
+  - {name: bridge_platform, position: [0.4, 4.7, 0.32], size: [1.7, 0.65, 0.32], surface: low_friction}

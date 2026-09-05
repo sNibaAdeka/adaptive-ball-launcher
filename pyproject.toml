@@ -1,0 +1,25 @@
+[project]
+name = "adaptive-ball-launcher-rl-lab"
+version = "0.1.0"
+description = "Safe virtual MuJoCo lab for adaptive ping-pong ball launching"
+requires-python = ">=3.12"
+dependencies = ["mujoco>=3.3", "gymnasium>=1.0", "stable-baselines3>=2.5", "torch>=2.8", "numpy>=2.0", "PyYAML>=6.0", "fastapi>=0.115", "uvicorn[standard]>=0.30"]
+
+[project.scripts]
+adaptive-ball-launcher = "adaptive_ball_launcher.main:main"
+
+[tool.setuptools]
+packages = [
+  "adaptive_ball_launcher",
+  "adaptive_ball_launcher.actuators",
+  "adaptive_ball_launcher.physics",
+  "adaptive_ball_launcher.simulation",
+  "adaptive_ball_launcher.launcher",
+  "adaptive_ball_launcher.rl",
+  "adaptive_ball_launcher.prediction",
+  "adaptive_ball_launcher.ui",
+  "adaptive_ball_launcher.logging",
+]
+
+[tool.setuptools.package-dir]
+adaptive_ball_launcher = "."
